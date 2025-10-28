@@ -239,7 +239,7 @@ main {
 }
 
 .profil-card p strong {
-    color: var(--biru-tua);
+    color: var(--biru-tua); /* Ini aturan umum yang bikin label jadi biru */
 }
 
 /* KHUSUS UNTUK KARTU PEMBINA */
@@ -257,10 +257,18 @@ main {
     color: var(--gold); /* Nama pembina gold */
 }
 
-.pembina-card p, .pembina-card strong {
-    color: var(--putih); /* Sesuaikan warna teks di dalam kartu pembina */
-    text-align: center; /* <<< --- PERUBAHAN DI SINI UNTUK MERATAKAN TEKS BAWAH --- >>> */
+.pembina-card p {
+    color: var(--putih); /* Tulisan biasa jadi putih */
+    text-align: center; /* Rata tengah */
 }
+
+/* --- INI PERBAIKANNYA --- */
+/* Memaksa label "Peran:", "Asal Sekolah:" di kartu pembina jadi PUTIH */
+.pembina-card p strong {
+    color: var(--putih) !important; 
+}
+/* --- SELESAI PERBAIKAN --- */
+
 
 .pembina-card img {
     border-color: var(--gold); /* Bingkai foto gold */
