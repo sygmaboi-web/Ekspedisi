@@ -1,35 +1,49 @@
 // Menunggu sampai semua konten HTML dimuat
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Pilih semua link di navigasi yang memiliki tanda pagar (#)
-    const navLinks = document.querySelectorAll('nav ul li a[href^="#"]');
+    // 1. Pilih semua link di navigasi
+    const navLinks = document.querySelectorAll('nav ul li a');
+    
+    // 2. Pilih semua section "halaman"
+    const pages = document.querySelectorAll('.page-section');
 
-    // Loop (ulangi) untuk setiap link yang ditemukan
-    navLinks.forEach(link => {
-        // Tambahkan 'event listener' (pendengar acara) saat link di-klik
-        link.addEventListener('click', function(e) {
-            
-            // 1. Mencegah perilaku default (agar tidak langsung loncat)
-            e.preventDefault();
-
-            // 2. Ambil ID tujuan dari atribut 'href' (misal: "#profil")
-            const targetId = this.getAttribute('href');
-            
-            // 3. Cari elemen di HTML yang punya ID tersebut
-            const targetSection = document.querySelector(targetId);
-
-            // 4. Jika elemennya ada, gulir ke sana dengan mulus
-            if (targetSection) {
-                // Kita perlu sedikit offset karena header-nya 'sticky'
-                const headerOffset = document.querySelector('header').offsetHeight;
-                const elementPosition = targetSection.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth' // Ini bagian yang membuatnya mulus!
-                });
+    // 3. Buat fungsi untuk menampilkan halaman
+    function showPage(pageId) {
+        // Loop semua halaman
+        pages.forEach(page => {
+            // Cek apakah ID halaman ini = ID yang diklik
+            if (page.id === pageId) {
+                // Jika ya, tambahkan class 'active' untuk menampilkannya
+                page.classList.add('active');
+            } else {
+                // Jika tidak, hapus class 'active' untuk menyembunyikannya
+                page.classList.remove('active');
             }
         });
+        
+        // Selalu scroll ke atas setiap pindah halaman
+        window.scrollTo(0, 0); 
+    }
+
+    // 4. Loop setiap link di navigasi
+    navLinks.forEach(link => {
+        // Tambahkan 'event listener' saat link di-klik
+        link.addEventListener('click', function(e) {
+            
+            // 5. Mencegah perilaku default (agar tidak loncat ke #)
+            e.preventDefault();
+
+            // 6. Ambil ID tujuan dari 'href' (misal: "#profil")
+            // Kita hapus tanda '#' nya dengan .substring(1)
+            const targetId = this.getAttribute('href').substring(1); // Hasilnya: "profil"
+            
+            // 7. Panggil fungsi untuk menampilkan halaman
+            showPage(targetId);
+        });
     });
+
+    // 8. (Opsional) Tampilkan halaman 'beranda' saat pertama kali dimuat
+    // Ini sudah diatasi dengan menambah class 'active' di HTML #beranda
+    // Tapi jika tidak ada, baris ini bisa dipakai:
+    // showPage('beranda'); 
 });
