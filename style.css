@@ -253,11 +253,13 @@ main {
     margin-bottom: 2rem; /* Beri jarak ke anggota di bawahnya */
 }
 
-.pembina-card h3, .pembina-card p, .pembina-card strong {
-    color: var(--putih); /* Sesuaikan warna teks */
-}
 .pembina-card h3 {
     color: var(--gold); /* Nama pembina gold */
+}
+
+.pembina-card p, .pembina-card strong {
+    color: var(--putih); /* Sesuaikan warna teks di dalam kartu pembina */
+    text-align: center; /* <<< --- PERUBAHAN DI SINI UNTUK MERATAKAN TEKS BAWAH --- >>> */
 }
 
 .pembina-card img {
@@ -266,10 +268,10 @@ main {
 
 /* Label "PEMBINA" yang gede */
 .pembina-label {
-    position: absolute; /* Posisikan secara absolut */
-    top: -15px; /* Sedikit di atas kartu */
+    position: absolute;
+    top: -15px;
     left: 50%;
-    transform: translateX(-50%); /* Pusatkan secara horizontal */
+    transform: translateX(-50%);
     background-color: var(--merah-tua);
     color: var(--putih);
     padding: 0.5rem 1.5rem;
@@ -323,14 +325,13 @@ main {
         width: 300px;
     }
 
-    /* Di desktop, kartu pembina mungkin perlu sedikit penyesuaian agar di tengah */
     .profil-grid {
-        grid-template-columns: repeat(3, 1fr); /* Atur ulang grid jika perlu */
+        grid-template-columns: repeat(3, 1fr);
     }
     .pembina-card {
-        grid-column: 1 / -1; /* Tetap full width */
-        max-width: 500px; /* Batasi lebar agar tidak terlalu besar */
-        margin: 0 auto 2rem auto; /* Pusatkan dan beri margin bawah */
+        grid-column: 1 / -1;
+        max-width: 500px;
+        margin: 0 auto 2rem auto;
     }
 }
 
