@@ -109,11 +109,21 @@ nav ul li a:focus {
     background-position: center;
     color: var(--putih);
     text-align: center;
-    padding: 5rem 2rem;
+    padding: 3rem 2rem; 
     min-height: 40vh; 
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+/* == CSS BARU UNTUK LOGO & JUDUL DI BERANDA == */
+.hero-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem; /* Jarak antara logo dan judul */
+    margin-bottom: 1rem; /* Jarak ke sub-judul */
+    flex-wrap: wrap; /* Biar rapi di HP */
 }
 
 #beranda.hero-section h1 {
@@ -123,21 +133,12 @@ nav ul li a:focus {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* == CSS BARU UNTUK LOGO DI BERANDA == */
-.logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem; /* Jarak antar logo */
-    margin: 1.5rem 0; /* Jarak atas-bawah */
-}
-
 .hero-logo {
-    width: 100px; /* Atur ukuran logo */
-    height: 100px; /* Atur ukuran logo */
+    width: 90px; /* Ukuran logo */
+    height: 90px; /* Ukuran logo */
     object-fit: contain; /* Biar logo gak penyok */
-    background-color: rgba(255, 255, 255, 0.1); /* Latar transparan */
-    border-radius: 50%; /* Bikin bulat */
+    background-color: transparent; /* TRANSPARAN */
+    border-radius: 8px; /* KOTAK (sedikit membulat) */
     padding: 5px;
     border: 2px solid var(--gold);
 }
@@ -182,28 +183,24 @@ main {
 }
 
 /* == KODE CSS UNTUK KEGIATAN (TIMELINE) == */
-/* Kode .kegiatan-grid dan .kegiatan-item sudah dihapus */
 .timeline {
     position: relative;
     max-width: 900px;
     margin: 0 auto;
     padding: 2rem 0;
-    /* Garis vertikal utama */
     border-left: 4px solid var(--merah-tua);
 }
 
 .timeline-item {
     display: flex;
     position: relative;
-    margin-bottom: 2.5rem; /* Jarak antar item */
-    padding-left: 2.5rem; /* Jarak dari garis */
+    margin-bottom: 2.5rem; 
+    padding-left: 2.5rem; 
 }
 
-/* Titik di garis (bulatan) */
 .timeline-item::before {
     content: '';
     position: absolute;
-    /* Posisikan titik di atas garis */
     left: -12px; 
     top: 5px;
     width: 20px;
@@ -215,7 +212,7 @@ main {
 }
 
 .timeline-date {
-    flex-basis: 30%; /* Lebar kolom tanggal */
+    flex-basis: 30%; 
     padding-right: 2rem;
     text-align: right;
 }
@@ -234,7 +231,7 @@ main {
 }
 
 .timeline-content {
-    flex-basis: 70%; /* Lebar kolom konten */
+    flex-basis: 70%; 
     background-color: var(--putih);
     border: 1px solid #ddd;
     border-left: 5px solid var(--gold);
@@ -251,7 +248,7 @@ main {
 
 .timeline-content ul {
     margin: 0;
-    padding-left: 1.5rem; /* Indentasi list */
+    padding-left: 1.5rem; 
 }
 
 .timeline-content li {
@@ -277,7 +274,7 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     border-top: 5px solid var(--gold);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative; /* Penting untuk posisi label pembina */
+    position: relative; 
 }
 
 .profil-card:hover {
@@ -310,33 +307,70 @@ main {
     color: var(--biru-tua);
 }
 
-/* KHUSUS UNTUK KARTU PEMBINA */
+/* == PERUBAHAN DI KARTU PEMBINA == */
 .pembina-card {
     grid-column: 1 / -1; 
     background-color: var(--biru-tua); 
     color: var(--putih);
     border: 2px solid var(--gold);
-    transform: none !important; 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     margin-bottom: 2rem; 
+    transition: box-shadow 0.3s ease, min-height 0.3s ease;
+    
+    /* Atur tinggi minimal & ratakan nama (default) */
+    min-height: 300px; /* Samakan tinggi dengan kartu lain */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Ratakan nama ke tengah (vertikal) */
+}
+
+.pembina-card:hover {
+    transform: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    justify-content: flex-start; /* Ratakan ke atas saat di-hover */
+    padding-top: 2rem; /* Beri padding saat hover */
 }
 
 .pembina-card h3 {
     color: var(--gold); 
+    margin-bottom: 1rem; 
 }
 
-.pembina-card p {
+/* FOTO (Baru) */
+.pembina-details img {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px; /* KOTAK */
+    object-fit: cover;
+    margin: 0 auto 1rem auto; /* Otomatis ke tengah */
+    border: 3px solid var(--gold);
+    background-color: #eee;
+}
+
+
+/* KODE HOVER UNTUK PEMBINA */
+.pembina-details {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease-out; /* Animasi muncul */
+}
+
+.pembina-card:hover .pembina-details {
+    opacity: 1;
+    max-height: 400px; /* Tinggikan agar foto dan teks muat */
+}
+
+.pembina-details p {
     color: var(--putih); 
     text-align: center; 
 }
 
-.pembina-card p strong {
+.pembina-details p strong {
     color: var(--putih) !important; 
 }
+/* ============================= */
 
-.pembina-card img {
-    border-color: var(--gold); 
-}
 
 /* Label "PEMBINA" yang gede */
 .pembina-label {
@@ -389,6 +423,25 @@ main {
 
 /* Media Query (Tampilan HP) */
 @media (max-width: 768px) {
+    /* Atur judul beranda di HP */
+    .hero-title-container {
+        gap: 1rem; /* Jarak lebih kecil */
+    }
+    #beranda.hero-section h1 {
+        font-size: 2.5rem; /* Judul lebih kecil */
+        order: 2; /* Pindah judul ke tengah */
+    }
+    .hero-logo:nth-of-type(1) {
+        order: 1; /* Logo 1 di kiri */
+    }
+    .hero-logo:nth-of-type(2) {
+        order: 3; /* Logo 2 di kanan */
+    }
+    .hero-logo {
+        width: 60px; /* Logo lebih kecil */
+        height: 60px;
+    }
+
     /* Atur timeline di HP */
     .timeline {
         padding: 1rem 0;
@@ -439,6 +492,7 @@ main {
         grid-column: 1 / -1;
         max-width: 100%; /* Lebar penuh di HP */
         margin: 0 auto 2rem auto;
+        min-height: 250px; /* Tinggi minimal di HP */
     }
 }
 
