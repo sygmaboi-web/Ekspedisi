@@ -9,7 +9,6 @@
     --teks-biasa: #333;
 }
 
-/* Hapus smooth scroll, kita ganti pakai JSS */
 html {
     /* scroll-behavior: smooth; -- DIHAPUS */
 }
@@ -84,22 +83,26 @@ nav ul li a:focus {
     border-bottom: 2px solid var(--gold);
 }
 
-/* KODE KUNCI UNTUK "PISAH HALAMAN"
-  Kita sembunyikan semua 'page-section'
-*/
+/* KODE KUNCI UNTUK "PISAH HALAMAN" */
 .page-section {
     display: none;
-    min-height: 60vh; /* Agar footer tidak naik-turun */
+    min-height: calc(100vh - 120px); /* Kurangi tinggi header dan footer */
+    padding-top: 2rem; /* Tambah padding agar tidak terlalu nempel header */
+    padding-bottom: 2rem;
+    box-sizing: border-box; /* Pastikan padding tidak menambah total tinggi */
 }
 
-/* Kita tampilkan yang punya class 'active' */
 .page-section.active {
     display: block;
 }
 
+/* Aturan khusus agar Hero Section tampil beda saat active */
+#beranda.hero-section.active {
+    display: flex; /* Override display:block agar flexbox tetap bekerja */
+}
+
 
 /* Bagian 1: Hero Section (Beranda) */
-/* Hero section adalah .page-section, jadi tidak perlu .hero-section sendiri */
 #beranda.hero-section {
     background: linear-gradient(rgba(0, 32, 74, 0.8), rgba(0, 32, 74, 0.8)), url('path/ke/foto_latar_belakang.jpg'); /* GANTI FOTO LATAR */
     background-size: cover;
@@ -108,15 +111,9 @@ nav ul li a:focus {
     text-align: center;
     padding: 5rem 2rem;
     min-height: 40vh; 
-    display: flex; /* Mengubah 'display' agar 'active' bisa menimpa */
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-/* Aturan khusus agar Hero Section tampil beda saat active */
-#beranda.hero-section.active {
-    display: flex;
 }
 
 #beranda.hero-section h1 {
@@ -212,6 +209,7 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     border-top: 5px solid var(--gold);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Penting untuk posisi label pembina */
 }
 
 .profil-card:hover {
@@ -243,6 +241,46 @@ main {
 .profil-card p strong {
     color: var(--biru-tua);
 }
+
+/* KHUSUS UNTUK KARTU PEMBINA */
+.pembina-card {
+    grid-column: 1 / -1; /* Membuatnya mengambil lebar penuh */
+    background-color: var(--biru-tua); /* Latar belakang berbeda */
+    color: var(--putih);
+    border: 2px solid var(--gold);
+    transform: none !important; /* Hilangkan efek hover untuk pembina agar selalu menonjol */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem; /* Beri jarak ke anggota di bawahnya */
+}
+
+.pembina-card h3, .pembina-card p, .pembina-card strong {
+    color: var(--putih); /* Sesuaikan warna teks */
+}
+.pembina-card h3 {
+    color: var(--gold); /* Nama pembina gold */
+}
+
+.pembina-card img {
+    border-color: var(--gold); /* Bingkai foto gold */
+}
+
+/* Label "PEMBINA" yang gede */
+.pembina-label {
+    position: absolute; /* Posisikan secara absolut */
+    top: -15px; /* Sedikit di atas kartu */
+    left: 50%;
+    transform: translateX(-50%); /* Pusatkan secara horizontal */
+    background-color: var(--merah-tua);
+    color: var(--putih);
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
 
 /* Sejarah */
 .sejarah-item {
@@ -284,7 +322,18 @@ main {
     .sejarah-item img {
         width: 300px;
     }
+
+    /* Di desktop, kartu pembina mungkin perlu sedikit penyesuaian agar di tengah */
+    .profil-grid {
+        grid-template-columns: repeat(3, 1fr); /* Atur ulang grid jika perlu */
+    }
+    .pembina-card {
+        grid-column: 1 / -1; /* Tetap full width */
+        max-width: 500px; /* Batasi lebar agar tidak terlalu besar */
+        margin: 0 auto 2rem auto; /* Pusatkan dan beri margin bawah */
+    }
 }
+
 
 /* Footer */
 footer {
