@@ -123,6 +123,27 @@ nav ul li a:focus {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* == CSS BARU UNTUK LOGO DI BERANDA == */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem; /* Jarak antar logo */
+    margin: 1.5rem 0; /* Jarak atas-bawah */
+}
+
+.hero-logo {
+    width: 100px; /* Atur ukuran logo */
+    height: 100px; /* Atur ukuran logo */
+    object-fit: contain; /* Biar logo gak penyok */
+    background-color: rgba(255, 255, 255, 0.1); /* Latar transparan */
+    border-radius: 50%; /* Bikin bulat */
+    padding: 5px;
+    border: 2px solid var(--gold);
+}
+/* =================================== */
+
+
 #beranda.hero-section h2 {
     font-size: 1.5rem;
     margin: 0.5rem 0 1rem 0;
@@ -160,38 +181,85 @@ main {
     text-align: center;
 }
 
-/* Grid Kegiatan (TANPA FOTO) */
-.kegiatan-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
+/* == KODE CSS UNTUK KEGIATAN (TIMELINE) == */
+/* Kode .kegiatan-grid dan .kegiatan-item sudah dihapus */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+    /* Garis vertikal utama */
+    border-left: 4px solid var(--merah-tua);
 }
 
-.kegiatan-item {
+.timeline-item {
+    display: flex;
+    position: relative;
+    margin-bottom: 2.5rem; /* Jarak antar item */
+    padding-left: 2.5rem; /* Jarak dari garis */
+}
+
+/* Titik di garis (bulatan) */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    /* Posisikan titik di atas garis */
+    left: -12px; 
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--gold);
+    border: 3px solid var(--biru-tua);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-date {
+    flex-basis: 30%; /* Lebar kolom tanggal */
+    padding-right: 2rem;
+    text-align: right;
+}
+
+.timeline-date span {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--merah-tua);
+    display: block;
+}
+
+.timeline-date p {
+    font-size: 1rem;
+    color: var(--teks-biasa);
+    margin: 0.2rem 0 0 0;
+}
+
+.timeline-content {
+    flex-basis: 70%; /* Lebar kolom konten */
     background-color: var(--putih);
     border: 1px solid #ddd;
+    border-left: 5px solid var(--gold);
+    padding: 1.5rem;
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-top: 5px solid var(--biru-tua); /* Aksen pengganti foto */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-.kegiatan-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-.kegiatan-item h3 {
-    font-size: 1.4rem;
+.timeline-content h3 {
+    margin: 0 0 1rem 0;
     color: var(--biru-tua);
-    margin: 1.5rem;
+    font-size: 1.4rem;
 }
 
-.kegiatan-item p {
-    font-size: 0.95rem;
-    margin: 0 1.5rem 1.5rem 1.5rem;
+.timeline-content ul {
+    margin: 0;
+    padding-left: 1.5rem; /* Indentasi list */
 }
+
+.timeline-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+/* ======================================= */
+
 
 /* Grid Profil Anggota */
 .profil-grid {
@@ -239,39 +307,35 @@ main {
 }
 
 .profil-card p strong {
-    color: var(--biru-tua); /* Ini aturan umum yang bikin label jadi biru */
+    color: var(--biru-tua);
 }
 
 /* KHUSUS UNTUK KARTU PEMBINA */
 .pembina-card {
-    grid-column: 1 / -1; /* Membuatnya mengambil lebar penuh */
-    background-color: var(--biru-tua); /* Latar belakang berbeda */
+    grid-column: 1 / -1; 
+    background-color: var(--biru-tua); 
     color: var(--putih);
     border: 2px solid var(--gold);
-    transform: none !important; /* Hilangkan efek hover untuk pembina agar selalu menonjol */
+    transform: none !important; 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    margin-bottom: 2rem; /* Beri jarak ke anggota di bawahnya */
+    margin-bottom: 2rem; 
 }
 
 .pembina-card h3 {
-    color: var(--gold); /* Nama pembina gold */
+    color: var(--gold); 
 }
 
 .pembina-card p {
-    color: var(--putih); /* Tulisan biasa jadi putih */
-    text-align: center; /* Rata tengah */
+    color: var(--putih); 
+    text-align: center; 
 }
 
-/* --- INI PERBAIKANNYA --- */
-/* Memaksa label "Peran:", "Asal Sekolah:" di kartu pembina jadi PUTIH */
 .pembina-card p strong {
     color: var(--putih) !important; 
 }
-/* --- SELESAI PERBAIKAN --- */
-
 
 .pembina-card img {
-    border-color: var(--gold); /* Bingkai foto gold */
+    border-color: var(--gold); 
 }
 
 /* Label "PEMBINA" yang gede */
@@ -323,22 +387,57 @@ main {
     font-size: 1.5rem;
 }
 
-@media (min-width: 768px) {
+/* Media Query (Tampilan HP) */
+@media (max-width: 768px) {
+    /* Atur timeline di HP */
+    .timeline {
+        padding: 1rem 0;
+        border-left: 3px solid var(--merah-tua);
+    }
+
+    .timeline-item {
+        flex-direction: column; /* Tumpuk ke bawah */
+        padding-left: 1.5rem;
+    }
+    
+    .timeline-item::before {
+        left: -10px; /* Sesuaikan posisi titik */
+        top: -2px;
+        width: 16px;
+        height: 16px;
+    }
+
+    .timeline-date {
+        flex-basis: auto;
+        text-align: left; /* Tanggal rata kiri */
+        padding-right: 0;
+        margin-bottom: 0.5rem;
+    }
+    
+    .timeline-date span {
+        font-size: 1.2rem;
+    }
+
+    .timeline-content {
+        flex-basis: auto;
+    }
+
+    /* Atur profil di HP */
     .sejarah-item {
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
     }
 
     .sejarah-item img {
-        width: 300px;
+        width: 100%; /* Lebar penuh di HP */
     }
 
     .profil-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr; /* 1 kolom di HP */
     }
     .pembina-card {
         grid-column: 1 / -1;
-        max-width: 500px;
+        max-width: 100%; /* Lebar penuh di HP */
         margin: 0 auto 2rem auto;
     }
 }
