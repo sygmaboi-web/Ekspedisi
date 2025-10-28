@@ -9,9 +9,9 @@
     --teks-biasa: #333;
 }
 
-/* Mengatur scroll-behavior di root agar link internal mulus */
+/* Hapus smooth scroll, kita ganti pakai JSS */
 html {
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; -- DIHAPUS */
 }
 
 body {
@@ -29,7 +29,7 @@ header {
     color: var(--gold);
     padding: 1rem 0;
     border-bottom: 5px solid var(--merah-tua);
-    position: sticky; /* Tetap di atas saat di-scroll */
+    position: sticky;
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -74,39 +74,65 @@ nav ul li a {
     font-size: 1rem;
     padding: 0.5rem;
     transition: color 0.3s ease, border-bottom 0.3s ease;
-    border-bottom: 2px solid transparent; /* Garis bawah transparan */
+    border-bottom: 2px solid transparent;
+    cursor: pointer; /* Menandakan bisa di-klik */
 }
 
 nav ul li a:hover,
 nav ul li a:focus {
-    color: var(--gold); /* Gold saat di-hover */
+    color: var(--gold);
     border-bottom: 2px solid var(--gold);
 }
 
+/* KODE KUNCI UNTUK "PISAH HALAMAN"
+  Kita sembunyikan semua 'page-section'
+*/
+.page-section {
+    display: none;
+    min-height: 60vh; /* Agar footer tidak naik-turun */
+}
+
+/* Kita tampilkan yang punya class 'active' */
+.page-section.active {
+    display: block;
+}
+
+
 /* Bagian 1: Hero Section (Beranda) */
-.hero-section {
+/* Hero section adalah .page-section, jadi tidak perlu .hero-section sendiri */
+#beranda.hero-section {
     background: linear-gradient(rgba(0, 32, 74, 0.8), rgba(0, 32, 74, 0.8)), url('path/ke/foto_latar_belakang.jpg'); /* GANTI FOTO LATAR */
     background-size: cover;
     background-position: center;
     color: var(--putih);
     text-align: center;
     padding: 5rem 2rem;
+    min-height: 40vh; 
+    display: flex; /* Mengubah 'display' agar 'active' bisa menimpa */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.hero-section h1 {
+/* Aturan khusus agar Hero Section tampil beda saat active */
+#beranda.hero-section.active {
+    display: flex;
+}
+
+#beranda.hero-section h1 {
     font-size: 3.5rem;
     margin: 0;
     color: var(--gold);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.hero-section h2 {
+#beranda.hero-section h2 {
     font-size: 1.5rem;
     margin: 0.5rem 0 1rem 0;
     font-weight: 300;
 }
 
-.hero-section p {
+#beranda.hero-section p {
     font-size: 1.1rem;
     max-width: 800px;
     margin: 0 auto;
@@ -115,17 +141,15 @@ nav ul li a:focus {
 /* Konten Utama */
 main {
     max-width: 1200px;
-    margin: 0 auto; /* Dihilangkan margin-top agar hero nempel */
+    margin: 0 auto;
     padding: 0;
 }
 
 .content-section {
     padding: 3rem 2rem;
-    /* Memberi jarak antar section */
-    border-bottom: 1px solid #ddd;
 }
 
-/* Ini untuk memisahkan tampilan antar menu */
+/* Latar belakang alternatif */
 .alternate-bg {
     background-color: var(--latar-alternatif);
 }
@@ -139,7 +163,7 @@ main {
     text-align: center;
 }
 
-/* Grid Kegiatan */
+/* Grid Kegiatan (TANPA FOTO) */
 .kegiatan-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -149,23 +173,16 @@ main {
 .kegiatan-item {
     background-color: var(--putih);
     border: 1px solid #ddd;
-    border-radius: 8px; /* Sudut kotak membulat */
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 5px solid var(--biru-tua); /* Aksen pengganti foto */
 }
 
 .kegiatan-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-.kegiatan-item img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    background-color: #eee;
-    border-radius: 8px 8px 0 0; /* Ubah ini agar sesuai */
 }
 
 .kegiatan-item h3 {
@@ -189,7 +206,7 @@ main {
 .profil-card {
     background-color: var(--putih);
     border: 1px solid #ddd;
-    border-radius: 8px; /* Sudut kotak membulat */
+    border-radius: 8px;
     padding: 1.5rem;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
@@ -202,11 +219,10 @@ main {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Ini kode untuk foto anggota (KOTAK) */
 .profil-card img {
     width: 150px;
     height: 150px;
-    border-radius: 8px; /* KOTAK dengan sudut membulat */
+    border-radius: 8px; /* KOTAK */
     object-fit: cover;
     margin-bottom: 1rem;
     border: 3px solid var(--biru-tua);
@@ -231,7 +247,7 @@ main {
 /* Sejarah */
 .sejarah-item {
     display: flex;
-    flex-direction: column; /* Tumpuk di mobile */
+    flex-direction: column; 
     gap: 1.5rem;
     background-color: var(--latar-alternatif);
     padding: 1.5rem;
@@ -240,13 +256,12 @@ main {
     border-left: 5px solid var(--merah-tua);
 }
 
-/* Ini kode untuk foto tempat di bagian sejarah (KOTAK) */
 .sejarah-item img {
     width: 100%;
-    max-width: 300px; /* Batasi lebar di desktop */
+    max-width: 300px;
     height: 200px;
     object-fit: cover;
-    border-radius: 8px; /* KOTAK dengan sudut membulat */
+    border-radius: 8px; /* KOTAK */
     background-color: #eee;
 }
 
@@ -260,18 +275,16 @@ main {
     font-size: 1.5rem;
 }
 
-/* Media Query untuk tampilan desktop */
 @media (min-width: 768px) {
     .sejarah-item {
-        flex-direction: row; /* Berdampingan di desktop */
+        flex-direction: row;
         align-items: center;
     }
 
     .sejarah-item img {
-        width: 300px; /* Ukuran tetap di desktop */
+        width: 300px;
     }
 }
-
 
 /* Footer */
 footer {
