@@ -45,9 +45,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // 8. Tambahan: Tangani hash di URL saat halaman pertama kali dimuat
     // Misalnya, jika user langsung membuka "index.html#profil"
     if (window.location.hash) {
-        showPage(window.location.hash.substring(1));
+        const hashId = window.location.hash.substring(1);
+        // Pastikan hash-nya adalah salah satu halaman kita
+        if (document.getElementById(hashId)) {
+            showPage(hashId);
+        } else {
+            showPage('beranda'); // Jika hash aneh, ke beranda aja
+        }
     } else {
         // Jika tidak ada hash, tampilkan halaman beranda
+        // (Ini penting jika user cuma buka index.html)
         showPage('beranda'); 
     }
 });
