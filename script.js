@@ -20,9 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // 4. Jika elemennya ada, gulir ke sana dengan mulus
             if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth', // Ini bagian yang membuatnya mulus!
-                    block: 'start' // Posisikan di bagian atas layar
+                // Kita perlu sedikit offset karena header-nya 'sticky'
+                const headerOffset = document.querySelector('header').offsetHeight;
+                const elementPosition = targetSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth' // Ini bagian yang membuatnya mulus!
                 });
             }
         });
