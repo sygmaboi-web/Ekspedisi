@@ -83,23 +83,27 @@ nav ul li a:focus {
     border-bottom: 2px solid var(--gold);
 }
 
-/* KODE KUNCI UNTUK "PISAH HALAMAN" */
+/* ================================================= */
+/* KODE KUNCI UNTUK "PISAH HALAMAN" (INI YANG PENTING) */
+/* ================================================= */
 .page-section {
-    display: none;
-    min-height: calc(100vh - 120px); /* Kurangi tinggi header dan footer */
-    padding-top: 2rem; /* Tambah padding agar tidak terlalu nempel header */
+    display: none; /* Sembunyikan semua "halaman" by default */
+    min-height: calc(100vh - 120px); 
+    padding-top: 2rem; 
     padding-bottom: 2rem;
-    box-sizing: border-box; /* Pastikan padding tidak menambah total tinggi */
+    box-sizing: border-box; 
 }
 
+/* Tampilkan HANYA halaman yang punya class 'active' */
 .page-section.active {
-    display: block;
+    display: block; 
 }
 
 /* Aturan khusus agar Hero Section tampil beda saat active */
 #beranda.hero-section.active {
     display: flex; /* Override display:block agar flexbox tetap bekerja */
 }
+/* ================================================= */
 
 
 /* Bagian 1: Hero Section (Beranda) */
@@ -116,14 +120,14 @@ nav ul li a:focus {
     align-items: center;
 }
 
-/* == CSS BARU UNTUK LOGO & JUDUL DI BERANDA == */
+/* == CSS FIX UNTUK LOGO & JUDUL DI BERANDA == */
 .hero-title-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem; /* Jarak antara logo dan judul */
-    margin-bottom: 1rem; /* Jarak ke sub-judul */
-    flex-wrap: wrap; /* Biar rapi di HP */
+    gap: 2rem; 
+    margin-bottom: 1rem; 
+    /* flex-wrap: wrap; -- INI DIHAPUS BIAR GAK ATAS-BAWAH */
 }
 
 #beranda.hero-section h1 {
@@ -134,11 +138,11 @@ nav ul li a:focus {
 }
 
 .hero-logo {
-    width: 90px; /* Ukuran logo */
-    height: 90px; /* Ukuran logo */
-    object-fit: contain; /* Biar logo gak penyok */
-    background-color: transparent; /* TRANSPARAN */
-    border-radius: 8px; /* KOTAK (sedikit membulat) */
+    width: 90px; 
+    height: 90px; 
+    object-fit: contain; 
+    background-color: transparent; 
+    border-radius: 0; /* FIX: Beneran Kotak */
     padding: 5px;
     border: 2px solid var(--gold);
 }
@@ -307,7 +311,7 @@ main {
     color: var(--biru-tua);
 }
 
-/* == PERUBAHAN DI KARTU PEMBINA == */
+/* == KARTU PEMBINA (HOVER FOTO) == */
 .pembina-card {
     grid-column: 1 / -1; 
     background-color: var(--biru-tua); 
@@ -317,8 +321,7 @@ main {
     margin-bottom: 2rem; 
     transition: box-shadow 0.3s ease, min-height 0.3s ease;
     
-    /* Atur tinggi minimal & ratakan nama (default) */
-    min-height: 300px; /* Samakan tinggi dengan kartu lain */
+    min-height: 300px; 
     display: flex;
     flex-direction: column;
     justify-content: center; /* Ratakan nama ke tengah (vertikal) */
@@ -328,7 +331,7 @@ main {
     transform: none;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     justify-content: flex-start; /* Ratakan ke atas saat di-hover */
-    padding-top: 2rem; /* Beri padding saat hover */
+    padding-top: 2rem; 
 }
 
 .pembina-card h3 {
