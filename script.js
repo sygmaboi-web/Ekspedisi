@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Selalu scroll ke atas setiap pindah halaman
+        // Selalu scroll ke atas setiap pindah "halaman"
         window.scrollTo(0, 0); 
     }
 
@@ -42,8 +42,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 8. (Opsional) Tampilkan halaman 'beranda' saat pertama kali dimuat
-    // Ini sudah diatasi dengan menambah class 'active' di HTML #beranda
-    // Tapi jika tidak ada, baris ini bisa dipakai:
-    // showPage('beranda'); 
+    // 8. Tambahan: Tangani hash di URL saat halaman pertama kali dimuat
+    // Misalnya, jika user langsung membuka "index.html#profil"
+    if (window.location.hash) {
+        showPage(window.location.hash.substring(1));
+    } else {
+        // Jika tidak ada hash, tampilkan halaman beranda
+        showPage('beranda'); 
+    }
 });
