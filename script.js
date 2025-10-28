@@ -83,7 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
             modalOverlay.style.display = 'flex'; // Tampilkan overlay
             setTimeout(() => { // Kasih jeda dikit biar transisi CSS jalan
                 modalOverlay.style.opacity = '1';
-                modalContent.style.transform = 'translate(-50%, -50%) scale(1)';
+                // ===== INI BAGIAN YANG DIPERBAIKI =====
+                modalContent.style.transform = 'scale(1)'; 
+                // ======================================
             }, 10);
         });
     });
@@ -91,7 +93,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fungsi untuk menutup modal
     function closeModal() {
         modalOverlay.style.opacity = '0';
-        modalContent.style.transform = 'translate(-50%, -50%) scale(0.9)';
+        // ===== INI BAGIAN YANG DIPERBAIKI =====
+        modalContent.style.transform = 'scale(0.9)';
+        // ======================================
         
         // Tunggu transisi selesai baru sembunyikan
         setTimeout(() => { 
