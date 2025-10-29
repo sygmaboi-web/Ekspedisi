@@ -7,43 +7,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const pages = document.querySelectorAll('.page-section');
 
     function showPage(pageId) {
-        // Loop semua halaman, sembunyikan semua
         pages.forEach(page => {
             page.classList.remove('active');
         });
         
-        // Tampilkan halaman yang dituju
         const targetPage = document.getElementById(pageId);
         if (targetPage) {
             targetPage.classList.add('active');
         }
         
-        // Selalu scroll ke atas setiap pindah "halaman"
         window.scrollTo(0, 0); 
     }
 
-    // Tambahkan event listener untuk setiap link navigasi
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1); // "profil"
+            const targetId = this.getAttribute('href').substring(1);
             showPage(targetId);
-            
-            // Juga ubah hash di URL (opsional tapi bagus)
             window.location.hash = targetId;
         });
     });
 
-    // Cek hash di URL pas pertama kali buka
     if (window.location.hash) {
         const hashId = window.location.hash.substring(1);
         if (document.getElementById(hashId)) {
             showPage(hashId);
         } else {
-            showPage('beranda'); // Default
+            showPage('beranda');
         }
     } else {
-        // Tampilkan beranda jika tidak ada hash
         showPage('beranda'); 
     }
 
@@ -60,7 +52,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalNama = document.getElementById('modalNama');
     const modalPeran = document.getElementById('modalPeran');
     const modalSekolah = document.getElementById('modalSekolah');
-    const modalTelp = document.getElementById('modalTelp');
+    
+    // == AMBIL ELEMEN TELEPON YANG BARU ==
+    const modalTelpFasilitator = document.getElementById('modalTelpFasilitator');
+    const modalTelpAyah = document.getElementById('modalTelpAyah');
+    const modalTelpIbu = document.getElementById('modalTelpIbu');
 
     // Loop setiap kartu profil dan tambahkan event listener
     profilTriggers.forEach(card => {
@@ -70,22 +66,28 @@ document.addEventListener('DOMContentLoaded', function() {
             const foto = this.dataset.foto;
             const peran = this.dataset.peran;
             const sekolah = this.dataset.sekolah;
-            const telp = this.dataset.telp;
+            
+            // == AMBIL DATA TELEPON YANG BARU ==
+            const telpFasilitator = this.dataset.telpFasilitator;
+            const telpAyah = this.dataset.telpAyah;
+            const telpIbu = this.dataset.telpIbu;
 
             // 2. Masukkan data ke dalam modal
             modalFoto.src = foto;
             modalNama.textContent = nama;
             modalPeran.textContent = peran;
             modalSekolah.textContent = "Asal Sekolah: " + sekolah;
-            modalTelp.textContent = "No. Telp: " + telp;
+
+            // == MASUKKAN DATA TELEPON YANG BARU ==
+            modalTelpFasilitator.textContent = "No. Fasilitator: " + telpFasilitator;
+            modalTelpAyah.textContent = "No. Telp Ayah: " + telpAyah;
+            modalTelpIbu.textContent = "No. Telp Ibu: " + telpIbu;
 
             // 3. Tampilkan modal dengan transisi
-            modalOverlay.style.display = 'flex'; // Tampilkan overlay
-            setTimeout(() => { // Kasih jeda dikit biar transisi CSS jalan
+            modalOverlay.style.display = 'flex'; 
+            setTimeout(() => { 
                 modalOverlay.style.opacity = '1';
-                // ===== INI BAGIAN YANG DIPERBAIKI =====
                 modalContent.style.transform = 'scale(1)'; 
-                // ======================================
             }, 10);
         });
     });
@@ -93,14 +95,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fungsi untuk menutup modal
     function closeModal() {
         modalOverlay.style.opacity = '0';
-        // ===== INI BAGIAN YANG DIPERBAIKI =====
         modalContent.style.transform = 'scale(0.9)';
-        // ======================================
         
-        // Tunggu transisi selesai baru sembunyikan
         setTimeout(() => { 
             modalOverlay.style.display = 'none';
-        }, 300); // 300ms (sesuai durasi transisi di CSS)
+        }, 300); // Sesuai durasi transisi di CSS
     }
 
     // Tambahkan event listener untuk tombol close
