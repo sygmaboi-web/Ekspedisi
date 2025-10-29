@@ -399,7 +399,7 @@ main {
     padding-bottom: 0.5rem; /* Beri jarak ke grup kontak */
 }
 
-/* == INI STYLE BARU UNTUK GRUP KONTAK == */
+/* Style untuk grup kontak */
 .modal-kontak {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -418,10 +418,13 @@ main {
 /* ======================================= */
 
 
-/* CSS SEJARAH */
+/* ======================================= */
+/* CSS SEJARAH (INI YANG DIPERBAIKI) */
+/* ======================================= */
 .sejarah-item {
     display: flex;
-    flex-direction: column; 
+    flex-direction: row; /* <-- DIUBAH DARI COLUMN KE ROW */
+    align-items: center;  /* <-- DITAMBAHKAN BIAR RAPI */
     gap: 1.5rem;
     background-color: var(--latar-alternatif);
     padding: 1.5rem;
@@ -429,9 +432,23 @@ main {
     border-radius: 8px;
     border-left: 5px solid var(--merah-tua);
 }
-.sejarah-item img { width: 100%; max-width: 300px; height: 200px; object-fit: cover; border-radius: 8px; background-color: #eee; }
-.sejarah-item div { flex: 1; }
-.sejarah-item h3 { color: var(--biru-tua); margin-top: 0; font-size: 1.5rem; }
+.sejarah-item img { 
+    width: 100%; 
+    max-width: 300px; 
+    height: 200px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    background-color: #eee;
+    flex-shrink: 0; /* Biar gambar gak penyet */
+}
+.sejarah-item div { 
+    flex: 1; 
+}
+.sejarah-item h3 { 
+    color: var(--biru-tua); 
+    margin-top: 0; 
+    font-size: 1.5rem; 
+}
 
 
 /* Media Query (Tampilan HP) */
@@ -452,7 +469,10 @@ main {
     .timeline-content { flex-basis: auto; }
     
     /* Atur profil & sejarah di HP */
-    .sejarah-item { flex-direction: column; align-items: center; }
+    .sejarah-item { 
+        flex-direction: column; /* <-- KEMBALI JADI COLUMN DI HP */
+        align-items: center; 
+    }
     .sejarah-item img { width: 100%; }
     .profil-grid { grid-template-columns: 1fr; }
 }
